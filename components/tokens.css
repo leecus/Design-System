@@ -1,0 +1,60 @@
+:root {
+  /* ── Brand Colors ── */
+  --ink:        #1a1d2e;
+  --ink-2:      #2d3150;
+  --ink-3:      #4a4f7a;
+  --ink-muted:  #8890b5;
+  --ink-faint:  #c5c8e4;
+  --ink-ghost:  #e8eaf2;
+
+  --coral:      #e8625b;
+  --coral-soft: #fde8e7;
+  --coral-ring: rgba(232, 98, 91, 0.18);
+
+  --teal:       #2a9d8f;
+  --teal-soft:  #e8f7f5;
+  --teal-ring:  rgba(42, 157, 143, 0.18);
+
+  --amber:      #e09e5a;
+  --amber-soft: #fef5e8;
+  --amber-ring: rgba(224, 158, 90, 0.18);
+
+  --slate:      #5e74b6;
+  --slate-soft: #eef1fb;
+  --slate-ring: rgba(94, 116, 182, 0.18);
+
+  /* ── Surfaces ── */
+  --bg:         #f4f3ef;
+  --surface:    #ffffff;
+  --surface-2:  #f9f8f5;
+  --border:     #e5e3dc;
+  --border-soft:#f0ede8;
+
+  /* ── Spacing / Radius ── */
+  --r-sm:  6px;
+  --r-md:  10px;
+  --r-lg:  16px;
+  --r-xl:  22px;
+  --r-pill: 999px;
+
+  /* ── Shadow ── */
+  --shadow-sm: 0 1px 3px rgba(26,29,46,0.06), 0 1px 2px rgba(26,29,46,0.04);
+  --shadow-md: 0 4px 12px rgba(26,29,46,0.08), 0 2px 4px rgba(26,29,46,0.05);
+  --shadow-lg: 0 12px 28px rgba(26,29,46,0.10), 0 4px 10px rgba(26,29,46,0.06);
+  --shadow-xl: 0 24px 48px rgba(26,29,46,0.12), 0 8px 16px rgba(26,29,46,0.06);
+
+  /* ── Motion ── */
+  --ease:  cubic-bezier(0.4, 0, 0.2, 1);
+  --spring:cubic-bezier(0.34, 1.56, 0.64, 1);
+  --t-fast: 150ms;
+  --t-base: 250ms;
+  --t-slow: 400ms;
+
+  /* ── Typography ── */
+  --font-sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-mono: 'DM Mono', ui-monospace, SFMono-Regular, monospace;
+
+  font-size: 14px;
+  color-scheme: light;
+}

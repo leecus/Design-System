@@ -1,0 +1,70 @@
+/* ── Module Card ── */
+.module-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  animation: cardIn 0.4s var(--ease) both;
+}
+
+.module-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 24px 18px;
+  border-bottom: 1px solid var(--border-soft);
+  background: var(--surface-2);
+}
+.module-title {
+  font-family: var(--font-display);
+  font-size: 18px; font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.3px;
+}
+.module-subtitle {
+  font-size: 12px; color: var(--ink-muted);
+  margin-top: 2px;
+  font-family: var(--font-mono);
+}
+.module-body { padding: 24px; }
+
+/* ── Stat Cards ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.stats-grid-row2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) 4fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 14px 16px;
+  min-height: 80px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--t-fast);
+}
+.stat-card:hover { box-shadow: var(--shadow-md); }
+.stat-label {
+  font-size: 11px; font-weight: 600;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.stat-value {
+  font-size: 26px; font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.stat-gray  { color: var(--ink-muted); }
+.stat-blue  { color: var(--slate); }
+.stat-green { color: var(--teal); }
+.stat-red   { color: var(--coral); }
+.stat-amber { color: var(--amber); }

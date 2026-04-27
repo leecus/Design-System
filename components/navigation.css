@@ -1,0 +1,131 @@
+/* ── Nav Tabs ── */
+.nav-tabs {
+  display: flex;
+  align-items: stretch;
+  height: 58px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex-shrink: 0;
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+
+.nav-tab {
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 16px;
+  height: 100%;
+  font-size: 13px; font-weight: 500;
+  color: var(--ink-muted);
+  cursor: pointer;
+  border: none; background: none;
+  position: relative;
+  transition: color var(--t-fast) var(--ease);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 10px; right: 10px;
+  height: 2.5px;
+  background: var(--coral);
+  border-radius: 2.5px 2.5px 0 0;
+  transform: scaleX(0) translateY(1px);
+  transition: transform var(--t-base) var(--spring);
+}
+.nav-tab:hover { color: var(--ink-2); }
+.nav-tab.active { color: var(--coral); font-weight: 600; }
+.nav-tab.active::after { transform: scaleX(1); }
+
+.nav-tab-icon {
+  width: 18px; height: 18px;
+  opacity: 0.7;
+  transition: opacity var(--t-fast);
+}
+.nav-tab:hover .nav-tab-icon,
+.nav-tab.active .nav-tab-icon { opacity: 1; }
+
+/* ── Tab Panes ── */
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* ── Sub Nav ── */
+.sub-nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  height: 42px;
+  gap: 2px;
+  position: sticky;
+  top: 58px;
+  z-index: 199;
+  box-shadow: var(--shadow-sm);
+}
+.sub-tab {
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 12px;
+  height: 100%;
+  font-size: 12.5px; font-weight: 500;
+  color: var(--ink-muted);
+  cursor: pointer;
+  border: none; background: none;
+  position: relative;
+  transition: color var(--t-fast) var(--ease);
+  white-space: nowrap;
+  border-radius: var(--r-sm);
+}
+.sub-tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 6px; right: 6px;
+  height: 2px;
+  background: var(--coral);
+  border-radius: 2px 2px 0 0;
+  transform: scaleX(0);
+  transition: transform var(--t-base) var(--spring);
+}
+.sub-tab:hover { color: var(--ink-2); background: var(--ink-ghost); }
+.sub-tab.active { color: var(--coral); font-weight: 600; }
+.sub-tab.active::after { transform: scaleX(1); }
+.sub-tab-icon { width: 14px; height: 14px; opacity: 0.7; }
+.sub-tab:hover .sub-tab-icon,
+.sub-tab.active .sub-tab-icon { opacity: 1; }
+
+.sub-tab-badge {
+  font-size: 10px; font-weight: 600;
+  padding: 1px 5px;
+  border-radius: var(--r-pill);
+  background: var(--ink-ghost);
+  color: var(--ink-muted);
+  transition: all var(--t-fast);
+}
+.sub-tab.active .sub-tab-badge {
+  background: var(--coral-soft);
+  color: var(--coral);
+}
+
+/* ── Breadcrumb ── */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+.breadcrumb-item {
+  color: var(--ink-muted);
+  text-decoration: none;
+  transition: color var(--t-fast);
+}
+.breadcrumb-item:hover { color: var(--ink-2); }
+.breadcrumb-item.active {
+  color: var(--ink);
+  font-weight: 600;
+  pointer-events: none;
+}
+.breadcrumb-sep {
+  color: var(--ink-faint);
+  font-size: 12px;
+  user-select: none;
+}

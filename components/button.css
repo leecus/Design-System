@@ -1,0 +1,66 @@
+.actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 18px;
+  border: none; border-radius: var(--r-md);
+  font-family: var(--font-sans);
+  font-size: 13px; font-weight: 600;
+  cursor: pointer;
+  transition: all var(--t-fast) var(--ease);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background var(--t-fast);
+}
+.btn:hover::after { background: rgba(255,255,255,0.12); }
+.btn:active { transform: scale(0.97); }
+
+.btn-coral {
+  background: var(--coral); color: #fff;
+  box-shadow: 0 2px 8px var(--coral-ring);
+}
+.btn-coral:hover { background: #d95450; box-shadow: 0 4px 14px var(--coral-ring); }
+
+.btn-teal {
+  background: var(--teal); color: #fff;
+  box-shadow: 0 2px 8px var(--teal-ring);
+}
+.btn-teal:hover { background: #258b80; box-shadow: 0 4px 14px var(--teal-ring); }
+
+.btn-amber {
+  background: var(--amber); color: #fff;
+  box-shadow: 0 2px 8px var(--amber-ring);
+}
+.btn-amber:hover { background: #cc8e50; box-shadow: 0 4px 14px var(--amber-ring); }
+
+.btn-slate {
+  background: var(--slate); color: #fff;
+  box-shadow: 0 2px 8px var(--slate-ring);
+}
+.btn-slate:hover { background: #5168b0; box-shadow: 0 4px 14px var(--slate-ring); }
+
+.btn-ghost {
+  background: var(--surface-2);
+  color: var(--ink-3);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+.btn-ghost:hover { background: var(--ink-ghost); border-color: var(--ink-faint); }
+.btn-danger { background: var(--coral); color: #fff; box-shadow: 0 2px 8px var(--coral-ring); }
+.btn-danger:hover { background: #d95450; box-shadow: 0 4px 14px var(--coral-ring); }
+.btn-sm { padding: 6px 12px; font-size: 12px; }
+.btn-lg { padding: 11px 24px; font-size: 14px; }
+.btn-icon { width:15px; height:15px; flex-shrink:0; pointer-events:none; }
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}

@@ -1,0 +1,36 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── App Shell ── */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page { display: none; opacity: 0; }
+.page.ready { display: flex; flex-direction: column; min-height: 100vh; }
+.page.ready { animation: pageIn 0.4s var(--ease) forwards; }
+
+.content {
+  flex: 1;
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 28px 28px 48px;
+}
+
+/* ── Utilities ── */
+.t-right { text-align: right; }
+.text-muted { color: var(--ink-muted); }
+.text-sm { font-size: 12px; }
+.mono { font-family: var(--font-mono); }

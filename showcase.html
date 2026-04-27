@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System · 组件展示</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Sans+SC:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dist/design-system.css">
+<style>
+/* ── Showcase specific styles ── */
+.showcase-page {
+  padding: 0 0 80px;
+}
+.showcase-hero {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 48px 28px 40px;
+  text-align: center;
+}
+.showcase-hero h1 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 6px;
+}
+.showcase-hero h1 span { color: var(--coral); }
+.showcase-hero p {
+  color: var(--ink-muted);
+  font-size: 14px;
+  margin: 0;
+}
+.showcase-hero-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  margin-top: 10px;
+}
+
+.showcase-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 44px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.showcase-nav::-webkit-scrollbar { display: none; }
+.showcase-nav a {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: var(--r-pill);
+  transition: all var(--t-fast);
+}
+.showcase-nav a:hover {
+  color: var(--ink);
+  background: var(--ink-ghost);
+}
+
+.showcase-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 28px 0;
+}
+.showcase-section:last-of-type {
+  padding-bottom: 32px;
+}
+.showcase-section h2 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+.showcase-section-desc {
+  font-size: 13px;
+  color: var(--ink-muted);
+  margin: 0 0 20px;
+}
+
+.showcase-block {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.showcase-block-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 18px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border-soft);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.showcase-block-body {
+  padding: 20px 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.showcase-block-body.column {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.showcase-block-body.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+.showcase-block-body.no-gap { gap: 0; }
+
+.showcase-code {
+  background: var(--ink);
+  color: #c5c8e4;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.8;
+  padding: 14px 18px;
+  overflow-x: auto;
+  white-space: pre;
+  border-top: 1px solid var(--border-soft);
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+.swatch-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+}
+.swatch-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.swatch-value {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--ink-muted);
+}
+
+.shadow-demo {
+  width: 120px;
+  height: 72px;
+  border-radius: var(--r-md);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.example-card {
+  padding: 16px;
+  background: var(--surface-2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-lg);
+  min-width: 200px;
+}
+.example-card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.spacing-demo {
+  background: var(--coral-soft);
+  border: 1.5px dashed var(--coral);
+  border-radius: var(--r-sm);
+  height: 24px;
+}
+
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+.icon-grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 8px;
+  background: var(--surface-2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-md);
+  transition: all var(--t-fast);
+}
+.icon-grid-item:hover {
+  border-color: var(--coral);
+  box-shadow: 0 0 0 3px var(--coral-ring);
+}
+.icon-grid-item svg {
+  width: 24px;
+  height: 24px;
+  color: var(--ink-2);
+}
+.icon-grid-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  text-align: center;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+</style>
+</head>
+<body>
+
+<div class="page ready">
+  <header class="topbar">
+    <a class="brand" href="#">
+      <div class="brand-icon">DS</div>
+      <div class="brand-name">Design <span>System</span></div>
+    </a>
+    <div class="topbar-divider"></div>
+    <nav class="nav-tabs">
+      <span style="display:flex;align-items:center;padding:0 16px;height:100%;font-size:13px;font-weight:500;color:var(--ink-2);">组件库展示</span>
+    </nav>
+    <div class="topbar-spacer"></div>
+    <div class="user-chip">
+      <span class="user-chip-label">版本</span>
+      <span class="user-chip-name">v1.0</span>
+    </div>
+  </header>
+
+  <main class="content showcase-page">
+
+    <!-- ──────────────────────────────────────
+         HERO
+         ────────────────────────────────────── -->
+    <div class="showcase-hero">
+      <h1>Frontend <span>Component Library</span></h1>
+      <p>企业级前端组件库 · 简洁、优雅、高效</p>
+      <div class="showcase-hero-meta">18 个组件模块 · 1300+ 行 CSS · 纯原生</div>
+    </div>
+
+    <!-- ──────────────────────────────────────
+         STICKY NAV
+         ────────────────────────────────────── -->
+    <nav class="showcase-nav">
+      <a href="#tokens">Design Tokens</a>
+      <a href="#icons">Icons</a>
+      <a href="#buttons">Buttons</a>
+      <a href="#form">Forms</a>
+      <a href="#badge">Badges</a>
+      <a href="#navigation">Navigation</a>
+      <a href="#cards">Cards</a>
+      <a href="#table">Table</a>
+      <a href="#feedback">Feedback</a>
+      <a href="#data-display">Data Display</a>
+      <a href="#avatar">Avatar</a>
+      <a href="#progress">Progress</a>
+      <a href="#skeleton">Skeleton</a>
+      <a href="#tooltip">Tooltip</a>
+      <a href="#switch">Switch</a>
+    </nav>
+
+    <!-- ══════════════════════════════════════
+         SECTION: DESIGN TOKENS
+         ══════════════════════════════════════ -->
+    <section id="tokens" class="showcase-section">
+      <h2>Design Tokens</h2>
+      <p class="showcase-section-desc">设计令牌 — 色彩、阴影、圆角、字体</p>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Color Palette · 色彩系统</div>
+        <div class="showcase-block-body grid">
+          <div class="swatch"><div class="swatch-circle" style="background:var(--ink);"></div><div class="swatch-label">ink</div><div class="swatch-value">#1a1d2e</div></div>
+          <div class="swatch"><div class="swatch-circle" style="background:var(--ink-2);"></div><div class="swatch-label">ink-2</div><div class="swatch-value">#2d3150</div></div>
+          <div class="swatch"><div class="swatch-circle" style="background:var(--ink-3);"></div><div class="swatch-label">ink-3</div><div class="swatch-value">#4a4f7a</div></div>
+          <div class="swatch"><div class="swatch-circle" style="background:var(--ink-muted);"></div><div class="swatch-label">ink-muted</div><div class="swatch-value">#8890b5</div></div>
+          <div class="swatch"><div class="swatch-circle" style="background:var(--ink-faint);"></div><div class="swatch-label">ink-faint</div><div class="swatch-value">#c5c8e4</div></div>
+          <div class="swatch"><div class="swatch-circle" style="background:var(--ink-ghost);"></div><div class="swatch-label">ink-ghost</div><div class="swatch-value">#e8eaf2</div></div>
+          <div class="swatch"><div class="swatch-circle" style="background:var(--coral);"></div><div class="swatch-label">coral</div><div class="swatch-value">#e8625b</div></div>
+          <div class="swatch"><div class="swatch-circle" style="background:var(--coral-soft);"></div><div class="swatch-label">coral-soft</div><div class="swatch-value">#fde8e7</div></div>
+          <div class="swatch"><div class="swatch-circle" style="background:var(--teal);"></div><div class="swatch-label">teal</div><div class="swatch-value">#2a9d8f</div></div>
+          <div class="swatch"><div class="swatch-circle" style="background:var(--teal-soft);"></div><div class="swatch-label">teal-soft</div><div class="swatch-value">#e8f7f5</div></div>
+          <div class="swatch"><div class="swatch-circle" style="background:var(--amber);"></div><div class="swatch-label">amber</div><div class="swatch-value">#e09e5a</div></div>
+          <div class="swatch"><div class="swatch-circle" style="background:var(--amber-soft);"></div><div class="swatch-label">amber-soft</div><div class="swatch-value">#fef5e8</div></div>
+          <div class="swatch"><div class="swatch-circle" style="background:var(--slate);"></div><div class="swatch-label">slate</div><div class="swatch-value">#5e74b6</div></div>
+          <div class="swatch"><div class="swatch-circle" style="background:var(--slate-soft);"></div><div class="swatch-label">slate-soft</div><div class="swatch-value">#eef1fb</div></div>
+          <div class="swatch"><div class="swatch-circle" style="background:var(--bg);border-color:var(--ink-faint);"></div><div class="swatch-label">bg</div><div class="swatch-value">#f4f3ef</div></div>
+          <div class="swatch"><div class="swatch-circle" style="background:var(--surface);border-color:var(--ink-faint);"></div><div class="swatch-label">surface</div><div class="swatch-value">#ffffff</div></div>
+        </div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Shadows · 阴影</div>
+        <div class="showcase-block-body">
+          <div class="shadow-demo" style="box-shadow:var(--shadow-sm);">sm</div>
+          <div class="shadow-demo" style="box-shadow:var(--shadow-md);">md</div>
+          <div class="shadow-demo" style="box-shadow:var(--shadow-lg);">lg</div>
+          <div class="shadow-demo" style="box-shadow:var(--shadow-xl);">xl</div>
+        </div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Border Radius · 圆角</div>
+        <div class="showcase-block-body">
+          <div style="width:60px;height:40px;background:var(--ink-ghost);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--ink-muted);">sm</div>
+          <div style="width:60px;height:40px;background:var(--ink-ghost);border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--ink-muted);">md</div>
+          <div style="width:60px;height:40px;background:var(--ink-ghost);border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--ink-muted);">lg</div>
+          <div style="width:60px;height:40px;background:var(--ink-ghost);border-radius:var(--r-xl);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--ink-muted);">xl</div>
+        </div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Typography · 字体</div>
+        <div class="showcase-block-body column">
+          <div style="font-family:var(--font-sans);font-size:16px;"><strong>Noto Sans SC</strong> · 你好世界 ABC abc 123</div>
+          <div style="font-family:var(--font-display);font-size:16px;"><strong>Playfair Display</strong> · Hello World 设计系统</div>
+          <div style="font-family:var(--font-mono);font-size:14px;"><strong>DM Mono</strong> · const foo = bar =&gt; baz 0x1A</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECTION: ICONS
+         ══════════════════════════════════════ -->
+    <section id="icons" class="showcase-section">
+      <h2>Icons</h2>
+      <p class="showcase-section-desc">SVG 图标库 · 24×24 · stroke 风格 · 统一视觉语言</p>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Navigation · 导航图标</div>
+        <div class="showcase-block-body">
+          <div class="icon-grid">
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/><path d="m9 12 2 2 4-4"/></svg>
+              <span class="icon-grid-label">Clipboard Check</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20"/></svg>
+              <span class="icon-grid-label">Credit Card</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><path d="M7 12h10"/><path d="m15 9 3 3-3 3"/></svg>
+              <span class="icon-grid-label">Arrow Flow</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg>
+              <span class="icon-grid-label">Clock</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+              <span class="icon-grid-label">File Text</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+              <span class="icon-grid-label">Settings</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              <span class="icon-grid-label">Activity</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              <span class="icon-grid-label">Grid</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/><path d="M9 12h6"/><path d="M9 16h6"/></svg>
+              <span class="icon-grid-label">Clipboard List</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Actions · 操作图标</div>
+        <div class="showcase-block-body">
+          <div class="icon-grid">
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+              <span class="icon-grid-label">Play</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              <span class="icon-grid-label">Calendar</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg>
+              <span class="icon-grid-label">Calendar Days</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
+              <span class="icon-grid-label">Send</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              <span class="icon-grid-label">Refresh</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              <span class="icon-grid-label">Zap</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8"/><path d="M7 3v5h8"/></svg>
+              <span class="icon-grid-label">Save</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+              <span class="icon-grid-label">Check Circle</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              <span class="icon-grid-label">Close</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              <span class="icon-grid-label">Check</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>
+              <span class="icon-grid-label">Sort</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Feedback · 反馈图标</div>
+        <div class="showcase-block-body">
+          <div class="icon-grid">
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              <span class="icon-grid-label">Info</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+              <span class="icon-grid-label">Success</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+              <span class="icon-grid-label">Warning</span>
+            </div>
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6"/><path d="M9 9l6 6"/></svg>
+              <span class="icon-grid-label">Error</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Usage Guidelines · 使用规范</div>
+        <div class="showcase-block-body column">
+          <div style="font-size:13px;color:var(--ink-2);line-height:1.8;">
+            <p style="margin:0 0 6px;"><strong>尺寸：</strong>导航栏图标 18×18，按钮图标 15×15，展示图标 24×24</p>
+            <p style="margin:0 0 6px;"><strong>配色：</strong>默认使用 <code class="mono">currentColor</code>，跟随父元素文字颜色</p>
+            <p style="margin:0 0 6px;"><strong>属性：</strong><code class="mono">fill="none"</code> <code class="mono">stroke="currentColor"</code> <code class="mono">stroke-width="2"</code>（纯填充图标例外）</p>
+            <p style="margin:0;"><strong>使用方式：</strong>直接内联 SVG，通过 <code class="mono">.btn-icon</code> / <code class="mono">.nav-tab-icon</code> / <code class="mono">.alert-icon</code> 类控制尺寸</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECTION: BUTTONS
+         ══════════════════════════════════════ -->
+    <section id="buttons" class="showcase-section">
+      <h2>Buttons</h2>
+      <p class="showcase-section-desc">6 种变体 · 3 种尺寸 · 禁用状态</p>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Button Variants · 按钮变体</div>
+        <div class="showcase-block-body">
+          <button class="btn btn-coral">Coral</button>
+          <button class="btn btn-teal">Teal</button>
+          <button class="btn btn-amber">Amber</button>
+          <button class="btn btn-slate">Slate</button>
+          <button class="btn btn-ghost">Ghost</button>
+          <button class="btn btn-danger">Danger</button>
+        </div>
+        <div class="showcase-code">&lt;button class="btn btn-coral"&gt;Coral&lt;/button&gt;
+&lt;button class="btn btn-teal"&gt;Teal&lt;/button&gt;
+&lt;button class="btn btn-amber"&gt;Amber&lt;/button&gt;
+&lt;button class="btn btn-slate"&gt;Slate&lt;/button&gt;
+&lt;button class="btn btn-ghost"&gt;Ghost&lt;/button&gt;
+&lt;button class="btn btn-danger"&gt;Danger&lt;/button&gt;</div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Button Sizes · 按钮尺寸</div>
+        <div class="showcase-block-body">
+          <button class="btn btn-coral btn-sm">Small</button>
+          <button class="btn btn-teal">Default</button>
+          <button class="btn btn-amber btn-lg">Large</button>
+        </div>
+        <div class="showcase-code">&lt;button class="btn btn-coral btn-sm"&gt;Small&lt;/button&gt;
+&lt;button class="btn btn-teal"&gt;Default&lt;/button&gt;
+&lt;button class="btn btn-amber btn-lg"&gt;Large&lt;/button&gt;</div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Disabled · 禁用状态</div>
+        <div class="showcase-block-body">
+          <button class="btn btn-coral" disabled>Coral</button>
+          <button class="btn btn-teal" disabled>Teal</button>
+          <button class="btn btn-ghost" disabled>Ghost</button>
+        </div>
+        <div class="showcase-code">&lt;button class="btn btn-coral" disabled&gt;Coral&lt;/button&gt;</div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECTION: FORMS
+         ══════════════════════════════════════ -->
+    <section id="form" class="showcase-section">
+      <h2>Forms</h2>
+      <p class="showcase-section-desc">输入框、选择框、文本域、Checkbox、Radio、Switch、Filter Bar</p>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Input · Select · Textarea</div>
+        <div class="showcase-block-body column">
+          <div class="form-section" style="width:100%;margin-bottom:0;">
+            <div class="field">
+              <label>文本输入</label>
+              <input placeholder="请输入内容...">
+            </div>
+            <div class="field">
+              <label>选择框</label>
+              <select><option>选项一</option><option selected>选项二</option><option>选项三</option></select>
+            </div>
+            <div class="field">
+              <label>禁用状态</label>
+              <input value="不可编辑" disabled style="opacity:0.6;background:var(--ink-ghost);">
+            </div>
+            <div class="field">
+              <label>带提示</label>
+              <input placeholder="输入工号">
+              <span class="field-hint">支持多工号，逗号分隔</span>
+            </div>
+          </div>
+        </div>
+        <div class="showcase-code">&lt;div class="field"&gt;
+  &lt;label&gt;文本输入&lt;/label&gt;
+  &lt;input placeholder="请输入内容..."&gt;
+  &lt;span class="field-hint"&gt;提示文字&lt;/span&gt;
+&lt;/div&gt;</div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Textarea · 文本域</div>
+        <div class="showcase-block-body column">
+          <div class="field" style="width:100%;">
+            <label>备注说明</label>
+            <textarea rows="4" placeholder="请输入详细说明..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Checkbox · 复选框</div>
+        <div class="showcase-block-body">
+          <label class="checkbox">
+            <input type="checkbox" checked>
+            <span class="checkbox-box"></span>
+            <span>已选中</span>
+          </label>
+          <label class="checkbox">
+            <input type="checkbox">
+            <span class="checkbox-box"></span>
+            <span>未选中</span>
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" disabled>
+            <span class="checkbox-box"></span>
+            <span style="opacity:0.5;">禁用</span>
+          </label>
+        </div>
+        <div class="showcase-code">&lt;label class="checkbox"&gt;
+  &lt;input type="checkbox"&gt;
+  &lt;span class="checkbox-box"&gt;&lt;/span&gt;
+  &lt;span&gt;标签文字&lt;/span&gt;
+&lt;/label&gt;</div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Radio · 单选框</div>
+        <div class="showcase-block-body">
+          <label class="radio">
+            <input type="radio" name="demo-radio" checked>
+            <span class="radio-circle"></span>
+            <span>选项 A</span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="demo-radio">
+            <span class="radio-circle"></span>
+            <span>选项 B</span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="demo-radio" disabled>
+            <span class="radio-circle"></span>
+            <span style="opacity:0.5;">禁用</span>
+          </label>
+        </div>
+        <div class="showcase-code">&lt;label class="radio"&gt;
+  &lt;input type="radio" name="group"&gt;
+  &lt;span class="radio-circle"&gt;&lt;/span&gt;
+  &lt;span&gt;标签文字&lt;/span&gt;
+&lt;/label&gt;</div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Switch · 开关</div>
+        <div class="showcase-block-body">
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="switch-track"></span>
+            <span class="switch-label">已开启</span>
+          </label>
+          <label class="switch">
+            <input type="checkbox">
+            <span class="switch-track"></span>
+            <span class="switch-label">已关闭</span>
+          </label>
+        </div>
+        <div class="showcase-code">&lt;label class="switch"&gt;
+  &lt;input type="checkbox" checked&gt;
+  &lt;span class="switch-track"&gt;&lt;/span&gt;
+  &lt;span class="switch-label"&gt;已开启&lt;/span&gt;
+&lt;/label&gt;</div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Filter Bar · 筛选栏</div>
+        <div class="showcase-block-body column" style="padding:16px 18px;">
+          <div class="filter-bar" style="margin-bottom:0;width:100%;">
+            <div class="filter-item">
+              <label>日期</label>
+              <input type="date" class="filter-input" value="2026-04-25">
+            </div>
+            <div class="filter-item">
+              <label>状态</label>
+              <select class="filter-select">
+                <option>全部</option>
+                <option selected>已完成</option>
+                <option>进行中</option>
+              </select>
+            </div>
+            <div class="filter-item">
+              <label>关键词</label>
+              <input type="text" class="filter-input" placeholder="搜索..." style="width:140px;">
+            </div>
+            <div class="filter-actions">
+              <button class="btn btn-coral btn-sm">查询</button>
+              <button class="btn btn-ghost btn-sm">重置</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECTION: BADGES
+         ══════════════════════════════════════ -->
+    <section id="badge" class="showcase-section">
+      <h2>Badges, Tags & Status</h2>
+      <p class="showcase-section-desc">Badge 徽标 · Status 状态指示 · Data Tag 数据标签</p>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Badges · 徽标</div>
+        <div class="showcase-block-body">
+          <span class="badge badge-success">success</span>
+          <span class="badge badge-muted">muted</span>
+          <span class="badge badge-warn">warn</span>
+          <span class="badge badge-coral">coral</span>
+          <span class="badge badge-slate">slate</span>
+        </div>
+        <div class="showcase-code">&lt;span class="badge badge-success"&gt;success&lt;/span&gt;</div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Status · 状态指示</div>
+        <div class="showcase-block-body">
+          <div class="status status-info"><div class="status-dot"></div>Info</div>
+          <div class="status status-success"><div class="status-dot"></div>Success</div>
+          <div class="status status-warning"><div class="status-dot"></div>Warning</div>
+          <div class="status status-error"><div class="status-dot"></div>Error</div>
+        </div>
+        <div class="showcase-code">&lt;div class="status status-success"&gt;
+  &lt;div class="status-dot"&gt;&lt;/div&gt;Success
+&lt;/div&gt;</div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Data Tags · 数据标签</div>
+        <div class="showcase-block-body">
+          <span class="dtag dtag-pending">pending</span>
+          <span class="dtag dtag-processing">processing</span>
+          <span class="dtag dtag-completed">completed</span>
+          <span class="dtag dtag-failed">failed</span>
+          <span class="dtag dtag-pushing">pushing</span>
+          <span class="dtag dtag-pushed">pushed</span>
+          <span class="dtag dtag-warning">warning</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECTION: NAVIGATION
+         ══════════════════════════════════════ -->
+    <section id="navigation" class="showcase-section">
+      <h2>Navigation</h2>
+      <p class="showcase-section-desc">Nav Tabs · Sub Nav · Breadcrumb · Config List</p>
+
+      <div class="showcase-block" id="demo-nav-tabs">
+        <div class="showcase-block-header">Nav Tabs · 顶栏标签（点击切换）</div>
+        <div class="showcase-block-body column" style="padding:0;">
+          <div style="border-bottom:1px solid var(--border);width:100%;padding:0 18px;">
+            <nav class="nav-tabs" style="height:48px;">
+              <button class="nav-tab active" data-tab="tab1" style="height:48px;">概览</button>
+              <button class="nav-tab" data-tab="tab2" style="height:48px;">分析</button>
+              <button class="nav-tab" data-tab="tab3" style="height:48px;">设置</button>
+              <button class="nav-tab" data-tab="tab4" style="height:48px;">日志</button>
+            </nav>
+          </div>
+          <div style="padding:20px 18px;width:100%;min-height:80px;">
+            <div class="tab-pane active" id="tab1" style="display:block;">
+              <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px;">概览面板</div>
+              <div style="font-size:12px;color:var(--ink-muted);">这里是概览内容区域，显示系统摘要和关键指标。</div>
+            </div>
+            <div class="tab-pane" id="tab2">
+              <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px;">分析面板</div>
+              <div style="font-size:12px;color:var(--ink-muted);">这里是数据分析区域，展示图表和统计结果。</div>
+            </div>
+            <div class="tab-pane" id="tab3">
+              <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px;">设置面板</div>
+              <div style="font-size:12px;color:var(--ink-muted);">系统设置与偏好配置。</div>
+            </div>
+            <div class="tab-pane" id="tab4">
+              <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px;">日志面板</div>
+              <div style="font-size:12px;color:var(--ink-muted);">操作日志和系统事件记录。</div>
+            </div>
+          </div>
+        </div>
+        <div class="showcase-code">&lt;button class="nav-tab active" data-tab="tab1"&gt;概览&lt;/button&gt;
+&lt;div class="tab-pane active" id="tab1"&gt;...&lt;/div&gt;</div>
+      </div>
+
+      <div class="showcase-block" id="demo-sub-nav">
+        <div class="showcase-block-header">Sub Nav · 二级菜单（点击切换）</div>
+        <div class="showcase-block-body column" style="padding:0;">
+          <div class="sub-nav" style="position:static;box-shadow:none;border-left:none;border-right:none;">
+            <button class="sub-tab active" data-sub="sub1">
+              <svg class="sub-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              概览统计
+            </button>
+            <button class="sub-tab" data-sub="sub2">
+              <svg class="sub-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/><path d="M9 12h6"/><path d="M9 16h6"/></svg>
+              任务列表
+              <span class="sub-tab-badge">42</span>
+            </button>
+            <button class="sub-tab" data-sub="sub3">
+              <svg class="sub-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+              日志
+            </button>
+          </div>
+          <div style="padding:20px 18px;width:100%;min-height:60px;">
+            <div class="tab-pane active" id="sub1" style="display:block;">
+              <div style="font-size:13px;color:var(--ink-2);">统计概览面板 — 展示今日任务数、成功率、平均耗时等关键指标。</div>
+            </div>
+            <div class="tab-pane" id="sub2">
+              <div style="font-size:13px;color:var(--ink-2);">任务列表面板 — 展示所有任务的状态、进度和操作入口。</div>
+            </div>
+            <div class="tab-pane" id="sub3">
+              <div style="font-size:13px;color:var(--ink-2);">日志面板 — 系统操作记录和审计日志。</div>
+            </div>
+          </div>
+        </div>
+        <div class="showcase-code">&lt;button class="sub-tab active" data-sub="sub1"&gt;概览统计&lt;/button&gt;
+&lt;div class="tab-pane active" id="sub1"&gt;...&lt;/div&gt;</div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Breadcrumb · 面包屑</div>
+        <div class="showcase-block-body">
+          <div class="breadcrumb">
+            <a class="breadcrumb-item" href="#">首页</a>
+            <span class="breadcrumb-sep">/</span>
+            <a class="breadcrumb-item" href="#">设置</a>
+            <span class="breadcrumb-sep">/</span>
+            <span class="breadcrumb-item active">模型配置</span>
+          </div>
+        </div>
+        <div class="showcase-code">&lt;div class="breadcrumb"&gt;
+  &lt;a class="breadcrumb-item" href="#"&gt;首页&lt;/a&gt;
+  &lt;span class="breadcrumb-sep"&gt;/&lt;/span&gt;
+  &lt;span class="breadcrumb-item active"&gt;模型配置&lt;/span&gt;
+&lt;/div&gt;</div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Config List · 配置列表</div>
+        <div class="showcase-block-body column" style="padding:0;">
+          <div style="width:300px;border:1.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;">
+            <div class="config-list-header"><span>配置项</span></div>
+            <div class="config-list-item active">
+              <div class="config-list-item-name">默认配置</div>
+              <div class="config-list-item-meta">default · v2.1</div>
+            </div>
+            <div class="config-list-item">
+              <div class="config-list-item-name">测试环境</div>
+              <div class="config-list-item-meta">staging · v1.8</div>
+            </div>
+            <div class="config-list-item">
+              <div class="config-list-item-name">生产环境</div>
+              <div class="config-list-item-meta">production · v3.0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECTION: CARDS
+         ══════════════════════════════════════ -->
+    <section id="cards" class="showcase-section">
+      <h2>Cards</h2>
+      <p class="showcase-section-desc">Module Card · Stat Cards</p>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Module Card · 模块卡片</div>
+        <div class="showcase-block-body column" style="padding:18px;">
+          <div class="module-card" style="width:100%;">
+            <div class="module-header">
+              <div>
+                <div class="module-title">模块名称</div>
+                <div class="module-subtitle">副标题 · 简要描述</div>
+              </div>
+              <span class="badge badge-coral">操作标签</span>
+            </div>
+            <div class="module-body">
+              <p style="margin:0;color:var(--ink-2);font-size:13px;">卡片正文内容区域，可包含表单、表格、或其他任意内容。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Stat Cards · 统计卡片</div>
+        <div class="showcase-block-body column" style="padding:18px;">
+          <div class="stats-grid" style="width:100%;">
+            <div class="stat-card"><div class="stat-label">总任务</div><div class="stat-value">1,847</div></div>
+            <div class="stat-card"><div class="stat-label">待处理</div><div class="stat-value stat-gray">234</div></div>
+            <div class="stat-card"><div class="stat-label">进行中</div><div class="stat-value stat-blue">18</div></div>
+            <div class="stat-card"><div class="stat-label">已完成</div><div class="stat-value stat-green">1,421</div></div>
+            <div class="stat-card"><div class="stat-label">失败</div><div class="stat-value stat-red">31</div></div>
+            <div class="stat-card"><div class="stat-label">预警</div><div class="stat-value stat-amber">7</div></div>
+            <div class="stat-card"><div class="stat-label">延迟</div><div class="stat-value stat-amber">12</div></div>
+          </div>
+        </div>
+        <div class="showcase-code">&lt;div class="stats-grid"&gt;
+  &lt;div class="stat-card"&gt;
+    &lt;div class="stat-label"&gt;总任务&lt;/div&gt;
+    &lt;div class="stat-value"&gt;1,847&lt;/div&gt;
+  &lt;/div&gt;
+  ...
+&lt;/div&gt;</div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECTION: TABLE
+         ══════════════════════════════════════ -->
+    <section id="table" class="showcase-section">
+      <h2>Data Table</h2>
+      <p class="showcase-section-desc">数据表格 · 排序 · 分页</p>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Table with Pagination · 表格与分页</div>
+        <div class="showcase-block-body column" style="padding:0;">
+          <div class="data-table-wrap" style="width:100%;border-radius:0;border:none;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>姓名</th>
+                  <th class="sortable sorted">状态 <span class="sort-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg></span></th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="mono">102341</td><td>李明</td><td><span class="dtag dtag-completed">completed</span></td><td><button class="btn btn-sm btn-ghost">详情</button></td></tr>
+                <tr><td class="mono">102340</td><td>王芳</td><td><span class="dtag dtag-pushed">pushed</span></td><td><button class="btn btn-sm btn-ghost">详情</button></td></tr>
+                <tr><td class="mono">102339</td><td>张伟</td><td><span class="dtag dtag-failed">failed</span></td><td><button class="btn btn-sm btn-ghost">详情</button></td></tr>
+                <tr><td class="mono">102338</td><td>刘强</td><td><span class="dtag dtag-processing">processing</span></td><td><button class="btn btn-sm btn-ghost">详情</button></td></tr>
+              </tbody>
+            </table>
+            <div class="pagination">
+              <div class="pg-info">共 42 条</div>
+              <div class="pg-controls">
+                <button class="btn btn-sm btn-ghost pg-btn" disabled>上一页</button>
+                <button class="btn btn-sm btn-coral pg-btn">1</button>
+                <button class="btn btn-sm btn-ghost pg-btn">2</button>
+                <button class="btn btn-sm btn-ghost pg-btn">3</button>
+                <span class="pg-ellipsis">...</span>
+                <button class="btn btn-sm btn-ghost pg-btn">下一页</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECTION: FEEDBACK
+         ══════════════════════════════════════ -->
+    <section id="feedback" class="showcase-section">
+      <h2>Feedback</h2>
+      <p class="showcase-section-desc">Alert · Toast · Modal · Drawer</p>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Alert · 警示框</div>
+        <div class="showcase-block-body column">
+          <div class="alert alert-info" style="width:100%;">
+            <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            <div>这是一条提示信息，用于说明当前状态或给出建议。</div>
+          </div>
+          <div class="alert alert-success" style="width:100%;">
+            <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+            <div>操作已成功完成，数据已保存。</div>
+          </div>
+          <div class="alert alert-warning" style="width:100%;">
+            <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+            <div>请注意，当前配置尚未保存，离开将丢失更改。</div>
+          </div>
+          <div class="alert alert-error" style="width:100%;">
+            <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6"/><path d="M9 9l6 6"/></svg>
+            <div>请求失败：模型超时，请重试或切换模型。</div>
+          </div>
+        </div>
+        <div class="showcase-code">&lt;div class="alert alert-info"&gt;
+  &lt;svg class="alert-icon"&gt;...&lt;/svg&gt;
+  &lt;div&gt;提示信息&lt;/div&gt;
+&lt;/div&gt;</div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Toast · 消息提示</div>
+        <div class="showcase-block-body">
+          <button class="btn btn-teal" onclick="showToast('操作成功', 'success')">成功 Toast</button>
+          <button class="btn btn-coral" onclick="showToast('请求失败', 'error')">失败 Toast</button>
+          <button class="btn btn-slate" onclick="showToast('信息已更新', 'info')">信息 Toast</button>
+          <button class="btn btn-amber" onclick="showToast('注意警告', 'warning')">警告 Toast</button>
+        </div>
+        <div class="showcase-code">showToast('操作成功', 'success');
+showToast('请求失败', 'error');
+showToast('信息已更新', 'info');
+showToast('注意警告', 'warning');</div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Modal · 模态框</div>
+        <div class="showcase-block-body">
+          <button class="btn btn-coral" onclick="document.getElementById('demo-modal').classList.add('open')">打开 Modal</button>
+        </div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Drawer · 抽屉</div>
+        <div class="showcase-block-body">
+          <button class="btn btn-slate" onclick="document.getElementById('demo-drawer').classList.add('open')">打开 Drawer</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECTION: DATA DISPLAY
+         ══════════════════════════════════════ -->
+    <section id="data-display" class="showcase-section">
+      <h2>Data Display</h2>
+      <p class="showcase-section-desc">Log/Result Panel · Empty State · Config Layout</p>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Log / Result Panel · 日志与结果</div>
+        <div class="showcase-block-body column" style="padding:18px;">
+          <div class="log-result-panel" style="width:100%;margin-top:0;padding-top:0;border-top:none;">
+            <div class="panel-section">
+              <h3>执行过程</h3>
+              <div class="log-box" style="height:120px;">
+                <div class="log-entry time">[09:41:22] 调试页已初始化</div>
+                <div class="log-entry ok">[09:41:23] 操作成功完成</div>
+                <div class="log-entry inf">[09:41:24] 正在加载配置...</div>
+                <div class="log-entry err">[09:41:25] 请求超时，重试中</div>
+              </div>
+            </div>
+            <div class="panel-section">
+              <h3>执行结果</h3>
+              <div class="result-box" style="height:120px;font-size:12px;line-height:1.6;">
+                处理完成，共 12 条记录
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Empty State · 空状态</div>
+        <div class="showcase-block-body column" style="padding:0;">
+          <div class="empty-state">
+            <svg class="empty-state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+            <div class="empty-state-title">暂无数据</div>
+            <div class="empty-state-desc">当前没有匹配的记录，请调整筛选条件或新建一条记录。</div>
+            <div class="actions">
+              <button class="btn btn-coral">新建记录</button>
+              <button class="btn btn-ghost">重置筛选</button>
+            </div>
+          </div>
+        </div>
+        <div class="showcase-code">&lt;div class="empty-state"&gt;
+  &lt;svg class="empty-state-icon"&gt;...&lt;/svg&gt;
+  &lt;div class="empty-state-title"&gt;暂无数据&lt;/div&gt;
+  &lt;div class="empty-state-desc"&gt;描述文字&lt;/div&gt;
+  &lt;div class="actions"&gt;
+    &lt;button class="btn btn-coral"&gt;新建记录&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECTION: AVATAR
+         ══════════════════════════════════════ -->
+    <section id="avatar" class="showcase-section">
+      <h2>Avatar</h2>
+      <p class="showcase-section-desc">头像 · 多种配色与尺寸 · 在线状态</p>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Avatar Sizes · 尺寸</div>
+        <div class="showcase-block-body">
+          <div class="avatar avatar-sm avatar-coral">李</div>
+          <div class="avatar avatar-md avatar-teal">王</div>
+          <div class="avatar avatar-lg avatar-slate">张</div>
+          <div class="avatar avatar-xl avatar-ink">刘</div>
+        </div>
+        <div class="showcase-code">&lt;div class="avatar avatar-sm avatar-coral"&gt;李&lt;/div&gt;
+&lt;div class="avatar avatar-md avatar-teal"&gt;王&lt;/div&gt;
+&lt;div class="avatar avatar-lg avatar-slate"&gt;张&lt;/div&gt;
+&lt;div class="avatar avatar-xl avatar-ink"&gt;刘&lt;/div&gt;</div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Avatar Variants · 配色变体</div>
+        <div class="showcase-block-body">
+          <div class="avatar avatar-md avatar-coral">A</div>
+          <div class="avatar avatar-md avatar-teal">B</div>
+          <div class="avatar avatar-md amber-avatar">C</div>
+          <div class="avatar avatar-md avatar-slate">D</div>
+          <div class="avatar avatar-md avatar-ink">E</div>
+        </div>
+      </div>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Avatar with Status · 在线状态</div>
+        <div class="showcase-block-body">
+          <div class="avatar avatar-lg avatar-teal" style="position:relative;">
+            王
+            <span class="avatar-status avatar-status-online"></span>
+          </div>
+          <div class="avatar avatar-lg avatar-coral" style="position:relative;">
+            张
+            <span class="avatar-status avatar-status-busy"></span>
+          </div>
+          <div class="avatar avatar-lg avatar-slate" style="position:relative;">
+            陈
+            <span class="avatar-status avatar-status-away"></span>
+          </div>
+          <div class="avatar avatar-lg avatar-ink" style="position:relative;">
+            刘
+            <span class="avatar-status avatar-status-offline"></span>
+          </div>
+        </div>
+        <div class="showcase-code">&lt;div class="avatar avatar-lg avatar-teal" style="position:relative;"&gt;
+  王
+  &lt;span class="avatar-status avatar-status-online"&gt;&lt;/span&gt;
+&lt;/div&gt;</div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECTION: PROGRESS
+         ══════════════════════════════════════ -->
+    <section id="progress" class="showcase-section">
+      <h2>Progress Bar</h2>
+      <p class="showcase-section-desc">进度条 · 4 种状态色</p>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Progress Variants · 进度条变体</div>
+        <div class="showcase-block-body column">
+          <div class="progress" style="width:100%;">
+            <div class="progress-track"><div class="progress-bar progress-bar-teal" style="width:75%;"></div></div>
+            <span class="progress-label">75%</span>
+          </div>
+          <div class="progress" style="width:100%;">
+            <div class="progress-track"><div class="progress-bar progress-bar-slate" style="width:45%;"></div></div>
+            <span class="progress-label">45%</span>
+          </div>
+          <div class="progress" style="width:100%;">
+            <div class="progress-track"><div class="progress-bar progress-bar-amber" style="width:60%;"></div></div>
+            <span class="progress-label">60%</span>
+          </div>
+          <div class="progress" style="width:100%;">
+            <div class="progress-track"><div class="progress-bar progress-bar-coral" style="width:30%;"></div></div>
+            <span class="progress-label">30%</span>
+          </div>
+        </div>
+        <div class="showcase-code">&lt;div class="progress"&gt;
+  &lt;div class="progress-track"&gt;
+    &lt;div class="progress-bar progress-bar-teal" style="width:75%;"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;span class="progress-label"&gt;75%&lt;/span&gt;
+&lt;/div&gt;</div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECTION: SKELETON
+         ══════════════════════════════════════ -->
+    <section id="skeleton" class="showcase-section">
+      <h2>Skeleton</h2>
+      <p class="showcase-section-desc">骨架屏 · 加载占位</p>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Skeleton Variants · 骨架屏变体</div>
+        <div class="showcase-block-body column">
+          <div style="width:300px;">
+            <div class="skeleton skeleton-title"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div style="display:flex;gap:10px;margin-top:12px;">
+              <div class="skeleton skeleton-avatar"></div>
+              <div style="flex:1;">
+                <div class="skeleton skeleton-text" style="width:60%;"></div>
+                <div class="skeleton skeleton-text" style="width:40%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="showcase-code">&lt;div class="skeleton skeleton-title"&gt;&lt;/div&gt;
+&lt;div class="skeleton skeleton-text"&gt;&lt;/div&gt;
+&lt;div class="skeleton skeleton-avatar"&gt;&lt;/div&gt;
+&lt;div class="skeleton skeleton-button"&gt;&lt;/div&gt;</div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECTION: TOOLTIP
+         ══════════════════════════════════════ -->
+    <section id="tooltip" class="showcase-section">
+      <h2>Tooltip</h2>
+      <p class="showcase-section-desc">工具提示 · 4 个方向</p>
+
+      <div class="showcase-block">
+        <div class="showcase-block-header">Tooltip Directions · 方向</div>
+        <div class="showcase-block-body" style="gap:32px;justify-content:center;padding:40px 18px;">
+          <div class="tooltip-wrap">
+            <button class="btn btn-sm btn-ghost">上</button>
+            <div class="tooltip tooltip-top">上方提示</div>
+          </div>
+          <div class="tooltip-wrap">
+            <button class="btn btn-sm btn-ghost">下</button>
+            <div class="tooltip tooltip-bottom">下方提示</div>
+          </div>
+          <div class="tooltip-wrap">
+            <button class="btn btn-sm btn-ghost">左</button>
+            <div class="tooltip tooltip-left">左侧提示</div>
+          </div>
+          <div class="tooltip-wrap">
+            <button class="btn btn-sm btn-ghost">右</button>
+            <div class="tooltip tooltip-right">右侧提示</div>
+          </div>
+        </div>
+        <div class="showcase-code">&lt;div class="tooltip-wrap"&gt;
+  &lt;button class="btn btn-sm btn-ghost"&gt;上&lt;/button&gt;
+  &lt;div class="tooltip tooltip-top"&gt;上方提示&lt;/div&gt;
+&lt;/div&gt;</div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECTION: SWITCH (already shown in forms)
+         ────────────────────────────────────── -->
+    <section id="switch" class="showcase-section">
+      <h2>Switch</h2>
+      <p class="showcase-section-desc">开关组件已在 <a href="#form" style="color:var(--coral);">Forms</a> 中展示，此处不再重复。</p>
+    </section>
+
+  </main>
+</div>
+
+<!-- ── Demo Modal ── -->
+<div class="modal-overlay" id="demo-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">确认操作</div>
+      <button class="btn btn-sm btn-ghost" onclick="document.getElementById('demo-modal').classList.remove('open')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p style="margin:0;font-size:13px;color:var(--ink-2);">确定要执行此操作吗？此操作不可撤销。</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="document.getElementById('demo-modal').classList.remove('open')">取消</button>
+      <button class="btn btn-coral" onclick="document.getElementById('demo-modal').classList.remove('open');showToast('操作成功','success');">确认</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Demo Drawer ── -->
+<div class="detail-overlay" id="demo-drawer">
+  <div class="detail-drawer">
+    <div class="detail-drawer-header">
+      <div>
+        <div class="detail-drawer-title">详情抽屉</div>
+        <div class="detail-drawer-subtitle">任务详情 · 2026-04-25</div>
+      </div>
+      <button class="btn btn-sm btn-ghost" onclick="document.getElementById('demo-drawer').classList.remove('open')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="detail-drawer-body">
+      <div class="detail-grid">
+        <dt>任务ID</dt><dd>102341</dd>
+        <dt>员工</dt><dd>李明</dd>
+        <dt>状态</dt><dd><span class="dtag dtag-completed">completed</span></dd>
+        <dt>耗时</dt><dd>3.1s</dd>
+      </div>
+      <div class="detail-actions">
+        <button class="btn btn-sm btn-coral" onclick="document.getElementById('demo-drawer').classList.remove('open');showToast('已重试','success');">重试</button>
+        <button class="btn btn-sm btn-ghost" onclick="document.getElementById('demo-drawer').classList.remove('open');">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Toast ──
+function showToast(msg, type) {
+  const container = document.getElementById('toast-container') || (() => {
+    const c = document.createElement('div');
+    c.id = 'toast-container';
+    c.className = 'toast-container';
+    document.body.appendChild(c);
+    return c;
+  })();
+  const toast = document.createElement('div');
+  toast.className = 'toast toast-' + (type || 'info');
+  toast.textContent = msg;
+  container.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+
+// ── Checkbox / Radio (no styling JS needed — pure CSS) ──
+
+// ── Nav Tab switching ──
+document.querySelectorAll('#demo-nav-tabs .nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const container = tab.closest('.showcase-block-body');
+    container.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const target = tab.dataset.tab;
+    container.querySelectorAll('.tab-pane').forEach(p => {
+      p.classList.toggle('active', p.id === target);
+      p.style.display = p.id === target ? 'block' : 'none';
+    });
+  });
+});
+
+// ── Sub Nav switching ──
+document.querySelectorAll('#demo-sub-nav .sub-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const container = tab.closest('.showcase-block-body');
+    container.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const target = tab.dataset.sub;
+    container.querySelectorAll('.tab-pane').forEach(p => {
+      p.classList.toggle('active', p.id === target);
+      p.style.display = p.id === target ? 'block' : 'none';
+    });
+  });
+});
+
+// ── Active nav highlight on scroll ──
+const navLinks = document.querySelectorAll('.showcase-nav a');
+const sections = document.querySelectorAll('.showcase-section');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(l => l.style.color = '');
+      const link = document.querySelector(`.showcase-nav a[href="#${entry.target.id}"]`);
+      if (link) link.style.color = 'var(--coral)';
+    }
+  });
+}, { rootMargin: '-60px 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+
+// ── Modal overlay click outside ──
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) overlay.classList.remove('open');
+  });
+});
+
+// ── Drawer overlay click outside ──
+document.querySelectorAll('.detail-overlay').forEach(overlay => {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) overlay.classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>
