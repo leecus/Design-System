@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Design System · 组件展示</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2 5 8l7 6 7-6-7-6Z' fill='none' stroke='%23e8625b' stroke-width='2.5' stroke-linejoin='round'/%3E%3Cpath d='M5 16l7 6 7-6' fill='none' stroke='%23e8625b' stroke-width='2.5' stroke-linejoin='round'/%3E%3Cpath d='M5 8v8' fill='none' stroke='%23e8625b' stroke-width='2.5'/%3E%3Cpath d='M19 8v8' fill='none' stroke='%23e8625b' stroke-width='2.5'/%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Sans+SC:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="dist/design-system.css">
 <style>
@@ -237,7 +238,14 @@
 <div class="page ready">
   <header class="topbar">
     <a class="brand" href="#">
-      <div class="brand-icon">DS</div>
+      <div class="brand-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linejoin="round">
+          <path d="M12 2 5 8l7 6 7-6-7-6Z"/>
+          <path d="M5 16l7 6 7-6"/>
+          <path d="M5 8v8"/>
+          <path d="M19 8v8"/>
+        </svg>
+      </div>
       <div class="brand-name">Design <span>System</span></div>
     </a>
     <div class="topbar-divider"></div>
@@ -259,7 +267,7 @@
     <div class="showcase-hero">
       <h1>Frontend <span>Component Library</span></h1>
       <p>企业级前端组件库 · 简洁、优雅、高效</p>
-      <div class="showcase-hero-meta">17 个组件模块 · 1300+ 行 CSS · 纯原生</div>
+      <div class="showcase-hero-meta">17 个组件模块 · 1300+ 行 CSS · 纯原生 · SVG 图标库</div>
     </div>
 
     <!-- ──────────────────────────────────────
@@ -353,6 +361,10 @@
         <div class="showcase-block-header">Navigation · 导航图标</div>
         <div class="showcase-block-body">
           <div class="icon-grid">
+            <div class="icon-grid-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"><path d="M12 2 5 8l7 6 7-6-7-6Z"/><path d="M5 16l7 6 7-6"/><path d="M5 8v8"/><path d="M19 8v8"/></svg>
+              <span class="icon-grid-label">Brand Logo</span>
+            </div>
             <div class="icon-grid-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/><path d="m9 12 2 2 4-4"/></svg>
               <span class="icon-grid-label">Clipboard Check</span>
